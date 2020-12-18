@@ -9,14 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
-@Table(name = "alunos")
+@Table(name = "tb_alunos")
 public class Alunos {
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long codigo;
+	@GeneratedValue(generator = "increment")
+	@GenericGenerator(name = "increment", strategy = "increment")
+	private long id;
 	@Column(name = "nome", nullable = false, length = 100, unique = true)
 	private String nome;
 	@Column(name = "email", nullable = false, length = 50)
@@ -42,12 +45,14 @@ public class Alunos {
 		this.cpf = cpf;
 	}
 
-	public long getCodigo() {
-		return codigo;
+
+
+	public long getId() {
+		return id;
 	}
 
-	public void setCodigo(long codigo) {
-		this.codigo = codigo;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
